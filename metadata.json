@@ -1,0 +1,6 @@
+{
+  "name": "Página de Vendas - Sites em 24h",
+  "description": "Página de vendas de alta performance, moderna, responsiva (mobile first), persuasiva e altamente otimizada para conversão de serviços de criação de sites profissionais em até 24 horas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
