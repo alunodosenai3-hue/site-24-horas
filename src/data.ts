@@ -8,7 +8,7 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
     themeColor: "#8b5cf6",
     gradient: "from-violet-600 via-purple-700 to-indigo-800",
     description: "Página luxuosa desenvolvida sob medida para clínicas modernas de odontologia e profissionais de estética orofacial que buscam agendamentos qualificados no particular.",
-    heroSnippet: "Dê vida ao seu sorriso com tratamentos modernos realizados por especialistas de alta confiança.",
+    heroSnippet: "Dê vida ao seu sorriso com treatments modernos realizados por especialistas de alta confiança.",
     features: [
       "Agendamento no WhatsApp de alta conversão",
       "Lista de Especialidades com detalhes refinados",
@@ -16,7 +16,9 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       "Avaliações Reais de Pacientes Integradas",
       "Endereço e rotas integradas ao Google Maps"
     ],
-    demoUrl: "https://dentista-portifolio01.netlify.app/"
+    demoUrl: "https://dentista-portifolio01.netlify.app/",
+    imageUrl: "https://i.postimg.cc/L54MzSN1/Captura-de-Tela-(124).png",
+    badgeText: "⭐ Modelo Premium"
   },
   {
     id: "advocacia",
@@ -33,7 +35,9 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       "Perfil dos Sócios e Equipe de Advogados",
       "Formulário avançado de contato seguro"
     ],
-    demoUrl: "https://advogado-portifolio.netlify.app/"
+    demoUrl: "https://advogado-portifolio.netlify.app/",
+    imageUrl: "https://i.postimg.cc/W4sSp43v/Captura-de-Tela-(125).png",
+    badgeText: "🔥 Mais Vendido"
   },
   {
     id: "moda",
@@ -50,7 +54,9 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       "Guia de Tamanhos interativo e simplificado",
       "Depoimentos reais de clientes satisfeitas"
     ],
-    demoUrl: "https://moda-portifolio.netlify.app/"
+    demoUrl: "https://moda-portifolio.netlify.app/",
+    imageUrl: "https://i.postimg.cc/9X43HLKk/Captura-de-Tela-(126).png",
+    badgeText: "✨ Campeão de Vendas"
   },
   {
     id: "farmacia",
@@ -67,7 +73,9 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       "Localização prática da unidade e canais de contato",
       "Opção de entrega expressa de fórmulas para o seu lar"
     ],
-    demoUrl: "https://farmacia-portifolio.netlify.app/"
+    demoUrl: "https://farmacia-portifolio.netlify.app/",
+    imageUrl: "https://i.postimg.cc/yNNQXdzy/Captura-de-Tela-(127).png",
+    badgeText: "⚡ Ultra Rápido"
   },
   {
     id: "padaria",
@@ -84,7 +92,9 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       "Espaço do Café e galeria de fotos acolhedoras",
       "Informações práticas de retirada e entrega"
     ],
-    demoUrl: "https://padaria-portifolio.netlify.app/"
+    demoUrl: "https://padaria-portifolio.netlify.app/",
+    imageUrl: "https://i.postimg.cc/76GKdWh3/Captura-de-Tela-(128).png",
+    badgeText: "⭐ Destaque Design"
   },
   {
     id: "mercadinho",
@@ -101,7 +111,9 @@ export const PORTFOLIO_ITEMS: PortfolioItem[] = [
       "Sinalização clara de taxa e área de atendimento",
       "Garantia de Qualidade e seleção cuidadosa de produtos"
     ],
-    demoUrl: "https://mercadinho-portifolio.netlify.app/"
+    demoUrl: "https://mercadinho-portifolio.netlify.app/",
+    imageUrl: "https://i.postimg.cc/DfGCcHtW/Captura-de-Tela-(129).png",
+    badgeText: "☘️ Alta Conversão"
   }
 ];
 

@@ -27,6 +27,30 @@ import { PORTFOLIO_ITEMS, REVIEWS, BENEFITS, BONUSES } from "./data";
 import Timer from "./components/Timer";
 import FAQAccordion from "./components/FAQAccordion";
 
+const premiumGridContainerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12
+    }
+  }
+};
+
+const premiumGridItemVariants = {
+  hidden: { opacity: 0, y: 35 },
+  show: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 90,
+      damping: 14,
+      duration: 0.6
+    }
+  }
+};
+
 export default function App() {
   // On page load, track general view event (PASSO 7)
   useEffect(() => {
@@ -367,7 +391,6 @@ export default function App() {
                   <span className="text-emerald-400 font-extrabold flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5" /> GRÁTIS INCLUSO
                   </span>
-                  <span className="text-gray-500 line-through">De R$ 49,90</span>
                 </div>
               </div>
             ))}
@@ -377,96 +400,123 @@ export default function App() {
 
       {/* ────────────────────────────────────────────────────────
           6ª SEÇÃO — PORTFÓLIO (Grid com 6 Modelos de Sites)
-          (Localizada convenientemente acima do preço principal para provar valor!)
+          (Localizada acima do preço principal para consolidar o imenso valor do kit)
           ──────────────────────────────────────────────────────── */}
-      <section className="py-16 px-4 max-w-6xl mx-auto space-y-12">
-        <div className="text-center space-y-2">
-          <span className="text-[10px] tracking-widest font-mono text-purple-400 font-extrabold uppercase block">
-            DEMONSTRAÇÃO INTERATIVA
+      <section className="py-24 px-4 max-w-6xl mx-auto space-y-16">
+        <div className="text-center space-y-4">
+          <span className="px-3.5 py-1 bg-purple-500/10 border border-purple-500/20 text-purple-300 font-extrabold text-[10px] font-mono tracking-[0.2em] uppercase rounded-full inline-block select-none">
+            💎 VITRINE DE MODELOS PREMIUM
           </span>
-          <h2 className="font-display font-medium text-2xl md:text-4xl text-white tracking-tight">
+          <h2 className="font-display font-medium text-3xl md:text-5xl text-white tracking-tight">
             Exemplos de Sites Que Você Pode Receber
           </h2>
-          <p className="text-xs md:text-sm text-gray-400 max-w-md mx-auto">
-            Clique em "Ver Modelo" para abrir a demonstração completa e ao vivo destes projetos criados com foco total em conversão e velocidade.
+          <p className="text-xs md:text-sm text-gray-400 max-w-xl mx-auto leading-relaxed">
+            Passe o mouse por cima de qualquer cartão para visualizar uma prévia lenta de cada modelo em tempo real ou clique em <strong className="text-purple-300">"Ver Modelo →"</strong> para abrir a demonstração completa ao vivo.
           </p>
         </div>
 
-        {/* 6 Models Portfolio Grid (3 cols on desktop, 1 on mobile) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Staggered Portfolio Grid (3 cols on desktop, 2 on tablet, 1 on mobile) */}
+        <motion.div 
+          variants={premiumGridContainerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {PORTFOLIO_ITEMS.map((item) => (
-            <div 
+            <motion.div 
               key={item.id}
               id={`portfolio-item-${item.id}`}
-              className="glass-panel rounded-2xl overflow-hidden border border-purple-500/10 flex flex-col justify-between group hover:border-purple-500/35 transition-all duration-300 shadow-md text-left"
+              variants={premiumGridItemVariants}
+              className="group relative bg-[#090518]/90 backdrop-blur-md rounded-2xl overflow-hidden border border-white/[0.06] hover:border-purple-500/50 flex flex-col hover:shadow-[0_0_30px_rgba(139,92,246,0.25)] transition-all duration-350 text-left transform hover:-translate-y-2"
             >
-              {/* Cover block linking straight to live site demo */}
-              <a 
-                href={item.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  if (typeof (window as any).sendMetaEvent === "function") {
-                    (window as any).sendMetaEvent("InitiateCheckout", { 
-                      source: "catalog_cover_click", 
-                      content_name: item.name 
-                    });
-                  }
-                }}
-                className={`h-36 bg-gradient-to-br ${item.gradient} p-4 flex flex-col justify-between relative overflow-hidden cursor-pointer group/cover`}
-              >
-                {/* Floating abstract decorative grid elements */}
-                <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]" />
-                
-                {/* Hover overlay for direct external link */}
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/cover:opacity-100 flex items-center justify-center transition-opacity duration-300 backdrop-blur-[2px]">
-                  <span className="text-xxs font-bold text-purple-300 flex items-center gap-1 bg-[#05020c]/85 px-3 py-1.5 border border-purple-500/20 rounded-full shadow-lg">
-                    <ExternalLink className="w-3.5 h-3.5" /> Ver Site Demo 🌐
+              <div className="flex flex-col h-full">
+                {/* Janela de Navegador no Estilo macOS */}
+                <div className="bg-slate-950/95 border-b border-white/5 py-2 px-4 flex items-center justify-between rounded-t-2xl">
+                  <div className="flex items-center gap-1.5 select-none">
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500/90 shadow-sm" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500/90 shadow-sm" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/90 shadow-sm" />
+                  </div>
+                  <span className="text-[9px] font-mono text-gray-500 tracking-wider truncate max-w-[150px] select-none">
+                    https://{item.id}.exemplo.site
                   </span>
+                  <div className="w-4" />
                 </div>
 
-                <span className="px-2.5 py-0.5 bg-black/60 backdrop-blur-md rounded-full text-xxs font-mono text-white/90 font-bold self-start border border-white/10">
-                  {item.category}
-                </span>
+                {/* Imagem do site (height: 260px, object-fit: cover, display: block, width: 100%) em full-bleed */}
+                <div className="relative h-[260px] w-full overflow-hidden select-none bg-slate-950">
+                  <img 
+                    src={item.imageUrl} 
+                    alt={item.name}
+                    loading="lazy"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-[260px] object-cover object-top block transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
+                  
+                  {/* Gradiente escuro calculado profissionalmente para perfeito contraste */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none z-10" />
+                  
+                  {/* Efeito Vidro Premium (Glassmorphism com blur de 16px) */}
+                  <div className="absolute top-3 left-3 z-20">
+                    <span className="px-3 py-1 bg-black/40 text-white/95 backdrop-blur-[16px] border border-white/10 rounded-full text-[9px] font-semibold uppercase tracking-wider shadow-sm select-none">
+                      {item.category}
+                    </span>
+                  </div>
 
-                <div className="relative z-10">
-                  <h4 className="text-sm font-display font-bold text-white tracking-tight leading-tight group-hover/cover:translate-x-1 transition-transform">
-                    {item.name.split(" - ")[0]}
-                  </h4>
-                  <p className="text-[10px] text-white/80 line-clamp-1 mt-0.5 font-mono">
-                    {item.name.split(" - ")[1] || "Website Profissional"}
-                  </p>
+                  {item.badgeText && (
+                    <div className="absolute top-3 right-3 z-20">
+                      <span className="px-2.5 py-1 bg-purple-950/40 text-purple-200 border border-purple-500/25 backdrop-blur-[16px] rounded-full text-[9px] font-extrabold tracking-wider uppercase shadow-lg select-none">
+                        {item.badgeText}
+                      </span>
+                    </div>
+                  )}
                 </div>
-              </a>
 
-              {/* Description Body */}
-              <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-                <p className="text-xxs md:text-xs text-gray-400 leading-relaxed line-clamp-3">
-                  {item.description}
-                </p>
+                {/* Área de Conteúdo imediatamente abaixo da imagem. padding: 24px (p-6) */}
+                <div className="p-6 flex flex-col flex-1 justify-between gap-5 bg-gradient-to-b from-slate-950/20 to-slate-950/80 border-t border-white/5">
+                  <div className="space-y-1.5">
+                    {/* Título: destaque visual, peso 700 */}
+                    <h3 className="text-base font-sans font-bold text-white tracking-tight leading-snug group-hover:text-purple-300 transition-colors duration-200">
+                      {item.name.split(" - ")[0]}
+                    </h3>
+                    
+                    {/* Descrição resumida com no máximo 2 linhas e reticências automáticas (line-clamp-2) */}
+                    <p className="text-xs text-gray-300/90 leading-relaxed font-sans line-clamp-2">
+                      {item.description}
+                    </p>
+                  </div>
 
-                <a
-                  href={item.demoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    if (typeof (window as any).sendMetaEvent === "function") {
-                      (window as any).sendMetaEvent("InitiateCheckout", { 
-                        source: "catalog_view_model", 
-                        content_name: item.name 
-                      });
-                    }
-                  }}
-                  className="w-full py-2.5 px-4 bg-purple-950/40 hover:bg-purple-600 border border-purple-500/25 text-white font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5 text-purple-300" />
-                  <span>Ver Modelo</span>
-                  <MousePointerClick className="w-3 h-3 text-purple-400 animate-pulse" />
-                </a>
+                  {/* Botão Ver Modelo posicionado logo abaixo da descrição */}
+                  <a
+                    href={item.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      if (typeof (window as any).sendMetaEvent === "function") {
+                        (window as any).sendMetaEvent("InitiateCheckout", { 
+                          source: "catalog_view_model_premium", 
+                          content_name: item.name 
+                        });
+                      }
+                    }}
+                    className="group/btn relative w-full overflow-hidden rounded-xl bg-gradient-to-r from-purple-600 via-fuchsia-600 to-indigo-600 p-px hover:shadow-[0_0_20px_rgba(168,85,247,0.45)] transition-all duration-350 cursor-pointer"
+                  >
+                    {/* Brilho animado de fundo discreto no hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:animate-[shimmerKeyframe_1.5s_infinite] pointer-events-none" />
+                    
+                    <div className="bg-[#0b061e] group-hover/btn:bg-transparent rounded-[11px] py-2.5 px-4 flex items-center justify-center gap-2 transition-colors duration-350">
+                      <span className="text-white font-extrabold text-xs tracking-wider inline-flex items-center gap-1.5">
+                        Ver Modelo 
+                        <span className="transition-transform duration-300 group-hover/btn:translate-x-1.5 font-bold text-sm">→</span>
+                      </span>
+                    </div>
+                  </a>
+                </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* ────────────────────────────────────────────────────────

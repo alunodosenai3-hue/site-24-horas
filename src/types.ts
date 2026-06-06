@@ -8,6 +8,8 @@ export interface PortfolioItem {
   heroSnippet: string;
   features: string[];
   demoUrl?: string;
+  imageUrl?: string;
+  badgeText?: string;
 }
 
 export interface ReviewItem {
