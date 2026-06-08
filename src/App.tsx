@@ -840,6 +840,33 @@ export default function App() {
         </div>
       </footer>
 
+      {/* Floating WhatsApp Button */}
+      <motion.a
+        href="https://wa.me/+5571992955846"
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => {
+          if (typeof (window as any).sendMetaEvent === "function") {
+            (window as any).sendMetaEvent("Lead", { source: "floating_whatsapp_click" });
+          }
+        }}
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-3 rounded-full shadow-[0_10px_25px_rgba(16,185,129,0.3)] hover:shadow-[0_15px_30px_rgba(16,185,129,0.5)] border border-emerald-400/20 group cursor-pointer transition-shadow duration-300"
+      >
+        <div className="relative">
+          {/* Pulsing state ring */}
+          <span className="absolute -inset-1.5 rounded-full bg-emerald-400/30 animate-ping opacity-75" />
+          <MessageSquare className="w-5 h-5 relative z-10 fill-white/10" />
+        </div>
+        <span className="text-xs font-extrabold tracking-wide uppercase select-none max-w-0 overflow-hidden group-hover:max-w-[120px] transition-all duration-300 whitespace-nowrap">
+          Fale Conosco
+        </span>
+      </motion.a>
+
     </div>
   );
 }
