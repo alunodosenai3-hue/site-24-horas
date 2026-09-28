@@ -172,7 +172,7 @@ export const BENEFITS: BenefitItem[] = [
   {
     id: "ben1",
     title: "Pagamento Somente na Entrega",
-    description: "Você não assume nenhum risco financeiro. Nós criamos e configuramos seu site primeiro, você avalia, e só paga o valor único de R$ 97 após aprovar o projeto final."
+    description: "Você não assume nenhum risco financeiro. Nós criamos e configuramos seu site primeiro, você avalia, e só paga 499,00 dividido no cartão após aprovar o projeto final."
   },
   {
     id: "ben2",
@@ -231,7 +231,7 @@ export const FAQS: FAQItem[] = [
   {
     id: "faq2",
     question: "Eu realmente só pago após o site estar pronto?",
-    answer: "Sim! Essa é a nossa maior garantia de honestidade. Nós confiamos piamente no nosso produto. Desenvolvemos o site completo, colocamos no ar em nosso link para você navegar e testar no celular. Somente após você olhar e falar 'Ficou sensacional, está aprovado!' é que enviamos a chave PIX para o pagamento único de R$ 97,00."
+    answer: "Sim! Essa é a nossa maior garantia de honestidade. Nós confiamos piamente no nosso produto. Desenvolvemos o site completo, colocamos no ar em nosso link para você navegar e testar no celular. Somente após você olhar e falar 'Ficou sensacional, está aprovado!' é que enviamos o link para o pagamento de 499,00 dividido no cartão."
   },
   {
     id: "faq3",
@@ -251,7 +251,7 @@ export const FAQS: FAQItem[] = [
   {
     id: "faq6",
     question: "Há custos adicionais ocultos com hospedagem?",
-    answer: "De forma alguma! A hospedagem em servidores velozes está inclusa sem taxas mensais para você na nossa conta coletiva. Não existe cobrança extra secreta. O pagamento do site é único de R$ 97,00."
+    answer: "De forma alguma! A hospedagem em servidores velozes está inclusa sem taxas mensais para você na nossa conta coletiva. Não existe cobrança extra secreta. O valor do site é de 499,00 dividido no cartão."
   },
   {
     id: "faq7",

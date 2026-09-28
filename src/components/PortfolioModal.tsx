@@ -19,7 +19,7 @@ export default function PortfolioModal({ item, onClose }: PortfolioModalProps) {
         content_name: item.name,
         content_category: item.category,
         content_ids: [item.id],
-        value: 97.00,
+        value: 499.00,
         currency: "BRL"
       });
     }
@@ -543,7 +543,7 @@ export default function PortfolioModal({ item, onClose }: PortfolioModalProps) {
               <span className="text-xs text-gray-400">Instalação e publicação em menos de 24h</span>
             </div>
             <a 
-              href="https://wa.me/+5571992955846?text=Olar!%20Amei%20o%20modelo%20do%20site%20e%20gostaria%20de%20garantir%20este%20layout%20por%20R$97!"
+              href="https://wa.me/+5571992955846?text=Ol%C3%A1!%20Amei%20o%20modelo%20do%20site%20e%20gostaria%20de%20garantir%20este%20layout%20por%20499%2C00%20dividido%20no%20cart%C3%A3o!"
               target="_blank"
               rel="noopener noreferrer"
               onClick={trackLead}

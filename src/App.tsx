@@ -20,7 +20,10 @@ import {
   ArrowRight,
   Smartphone,
   MousePointerClick,
-  ExternalLink
+  ExternalLink,
+  Eye,
+  Maximize2,
+  X
 } from "lucide-react";
 
 import { PORTFOLIO_ITEMS, REVIEWS, BENEFITS, BONUSES } from "./data";
@@ -52,6 +55,8 @@ const premiumGridItemVariants = {
 };
 
 export default function App() {
+  const [previewItem, setPreviewItem] = useState<(typeof PORTFOLIO_ITEMS)[0] | null>(null);
+
   // On page load, track general view event (PASSO 7)
   useEffect(() => {
     if (typeof (window as any).sendMetaEvent === "function") {
@@ -69,13 +74,13 @@ export default function App() {
     // Dispatch purchase track event (PASSO 5)
     if (typeof (window as any).sendMetaEvent === "function") {
       (window as any).sendMetaEvent("Purchase", {
-        value: 97.00,
+        value: 499.00,
         currency: "BRL"
       });
     }
 
     const text = encodeURIComponent(
-      "Olá Lucas! Vi a página de vendas e quero garantir a Oferta Especial do site profissional em até 24 horas por apenas R$ 97,00, com suporte grátis e os 3 PDFs bônus inclusos!"
+      "Olá Lucas! Vi a página de vendas e quero garantir a Oferta Especial do site profissional em até 24 horas por 499,00 dividido no cartão, com suporte grátis e os 3 PDFs bônus inclusos!"
     );
     window.open(`https://wa.me/5571992955846?text=${text}`, "_blank");
   };
@@ -411,7 +416,7 @@ export default function App() {
             Exemplos de Sites Que Você Pode Receber
           </h2>
           <p className="text-xs md:text-sm text-gray-400 max-w-xl mx-auto leading-relaxed">
-            Passe o mouse por cima de qualquer cartão para visualizar uma prévia lenta de cada modelo em tempo real ou clique em <strong className="text-purple-300">"Ver Modelo →"</strong> para abrir a demonstração completa ao vivo.
+            Conheça nossos templates de alta conversão. Clique na imagem para ampliar a captura completa ou clique em <strong className="text-purple-300">"Ver Modelo →"</strong> para abrir a demonstração interativa ao vivo.
           </p>
         </div>
 
@@ -441,32 +446,48 @@ export default function App() {
                   <span className="text-[9px] font-mono text-gray-500 tracking-wider truncate max-w-[150px] select-none">
                     https://{item.id}.exemplo.site
                   </span>
-                  <div className="w-4" />
+                  <button
+                    onClick={() => setPreviewItem(item)}
+                    title="Ampliar captura completa"
+                    className="text-gray-500 hover:text-purple-300 transition-colors p-0.5 cursor-pointer"
+                  >
+                    <Maximize2 className="w-3 h-3" />
+                  </button>
                 </div>
 
-                {/* Imagem do site (height: 260px, object-fit: cover, display: block, width: 100%) em full-bleed */}
-                <div className="relative h-[260px] w-full overflow-hidden select-none bg-slate-950">
+                {/* Imagem do site em proporção natural completa (aspect ratio 1280x580, 100% visível, SEM CORTAR pedaços) */}
+                <div 
+                  onClick={() => setPreviewItem(item)}
+                  className="relative w-full aspect-[1280/580] overflow-hidden select-none bg-slate-950 cursor-pointer group/img flex items-center justify-center"
+                >
                   <img 
                     src={item.imageUrl} 
                     alt={item.name}
+                    width={1280}
+                    height={580}
                     loading="lazy"
                     referrerPolicy="no-referrer"
-                    className="w-full h-[260px] object-cover object-top block transition-transform duration-500 ease-out group-hover:scale-105"
+                    className="w-full h-full object-contain block transition-transform duration-500 ease-out group-hover/img:scale-[1.03]"
                   />
                   
-                  {/* Gradiente escuro calculado profissionalmente para perfeito contraste */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent pointer-events-none z-10" />
+                  {/* Overlay moderno e sutil apenas no hover com ação de zoom */}
+                  <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none z-10 backdrop-blur-[2px]">
+                    <span className="px-3 py-1.5 bg-black/80 text-white border border-purple-500/40 rounded-full text-xs font-semibold flex items-center gap-1.5 shadow-xl transform translate-y-2 group-hover/img:translate-y-0 transition-transform duration-300">
+                      <Eye className="w-3.5 h-3.5 text-purple-400" />
+                      Ver Completo
+                    </span>
+                  </div>
                   
                   {/* Efeito Vidro Premium (Glassmorphism com blur de 16px) */}
-                  <div className="absolute top-3 left-3 z-20">
-                    <span className="px-3 py-1 bg-black/40 text-white/95 backdrop-blur-[16px] border border-white/10 rounded-full text-[9px] font-semibold uppercase tracking-wider shadow-sm select-none">
+                  <div className="absolute top-2 left-2 z-20 pointer-events-none">
+                    <span className="px-2.5 py-0.5 bg-black/60 text-white/95 backdrop-blur-[16px] border border-white/10 rounded-full text-[9px] font-semibold uppercase tracking-wider shadow-sm select-none">
                       {item.category}
                     </span>
                   </div>
 
                   {item.badgeText && (
-                    <div className="absolute top-3 right-3 z-20">
-                      <span className="px-2.5 py-1 bg-purple-950/40 text-purple-200 border border-purple-500/25 backdrop-blur-[16px] rounded-full text-[9px] font-extrabold tracking-wider uppercase shadow-lg select-none">
+                    <div className="absolute top-2 right-2 z-20 pointer-events-none">
+                      <span className="px-2.5 py-0.5 bg-purple-950/70 text-purple-200 border border-purple-500/30 backdrop-blur-[16px] rounded-full text-[9px] font-extrabold tracking-wider uppercase shadow-md select-none">
                         {item.badgeText}
                       </span>
                     </div>
@@ -550,9 +571,9 @@ export default function App() {
           {/* Pricing Highlight Card */}
           <div className="max-w-lg mx-auto bg-gradient-to-b from-purple-950/40 to-slate-950/90 border-2 border-purple-500/30 rounded-3xl p-6 md:p-8 shadow-[0_0_50px_rgba(168,85,247,0.2)] text-left relative overflow-hidden">
             
-            {/* Corner badge "Pagamento Único" */}
+            {/* Corner badge "Dividido no Cartão" */}
             <div className="absolute top-0 right-0 p-1.5 px-4 bg-purple-600 text-[10px] text-white font-extrabold tracking-wider rounded-bl-xl uppercase">
-              PAGAMENTO ÚNICO
+              DIVIDIDO NO CARTÃO
             </div>
 
             <div className="space-y-6">
@@ -585,15 +606,20 @@ export default function App() {
 
               {/* Price visual emphasis */}
               <div className="pt-6 border-t border-purple-500/10 flex flex-col items-center sm:items-start space-y-1">
-                <span className="text-xxs font-mono text-gray-400 line-through">Preço normal: R$ 349,00</span>
-                <div className="flex items-baseline gap-2">
+                <span className="text-xxs font-mono text-gray-400 line-through">Preço normal: R$ 1.200,00</span>
+                <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
                   <span className="text-xs text-gray-400 uppercase font-mono">Por apenas</span>
-                  <span className="text-3xl md:text-5xl font-mono font-extrabold tracking-tight bg-gradient-to-r from-yellow-300 via-amber-300 to-amber-400 bg-clip-text text-transparent">
-                    R$ 97,00
-                  </span>
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-3xl md:text-5xl font-mono font-extrabold tracking-tight bg-gradient-to-r from-yellow-300 via-amber-300 to-amber-400 bg-clip-text text-transparent">
+                      499,00
+                    </span>
+                    <span className="text-sm md:text-base font-bold text-amber-300 font-mono">
+                      dividido no cartão
+                    </span>
+                  </div>
                 </div>
                 <span className="text-[10px] md:text-xxs text-emerald-400 font-mono font-bold uppercase tracking-wider block">
-                  ✨ Pagamento único • Sem mensalidade obrigatória
+                  ✨ Sem mensalidade obrigatória • Hospedagem inclusa
                 </span>
               </div>
 
@@ -808,7 +834,7 @@ export default function App() {
               </a>
 
               <a 
-                href="https://www.facebook.com/lucasmoraisgpt" 
+                href="https://www.facebook.com/estudiofotograficolucasmorais" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-2 px-3 bg-purple-950/20 border border-purple-500/10 text-gray-300 hover:text-white hover:border-purple-500/40 rounded-xl text-xxs font-mono flex items-center gap-2 transition-colors cursor-pointer"
@@ -839,6 +865,88 @@ export default function App() {
 
         </div>
       </footer>
+
+      {/* Modal de Pré-visualização em Alta Resolução (Imagem Completa e Sem Cortes) */}
+      {previewItem && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity duration-300"
+          onClick={() => setPreviewItem(null)}
+        >
+          <div 
+            className="relative w-full max-w-4xl bg-[#0b061e] border border-purple-500/30 rounded-2xl shadow-[0_0_50px_rgba(139,92,246,0.3)] overflow-hidden flex flex-col max-h-[92vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Barra de Janela no Estilo macOS */}
+            <div className="bg-slate-950 px-4 py-3 border-b border-white/10 flex items-center justify-between select-none">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500/90" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/90" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90" />
+                <span className="ml-3 text-xs font-mono text-gray-400 hidden sm:inline">
+                  https://{previewItem.id}.exemplo.site — Captura Completa
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href={previewItem.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                >
+                  <span>Ver Site Ao Vivo</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <button 
+                  onClick={() => setPreviewItem(null)}
+                  className="p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+                  title="Fechar visualização"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Imagem do site em resolução total, 100% visível, sem cortes */}
+            <div className="overflow-y-auto p-3 sm:p-5 bg-slate-950 flex flex-col items-center">
+              <img 
+                src={previewItem.imageUrl} 
+                alt={previewItem.name} 
+                className="w-full h-auto object-contain rounded-lg border border-white/10 shadow-2xl"
+              />
+              
+              <div className="w-full mt-4 p-4 sm:p-5 bg-[#090518] rounded-xl border border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-mono text-purple-400 uppercase tracking-widest font-bold">
+                      {previewItem.category}
+                    </span>
+                    {previewItem.badgeText && (
+                      <span className="text-[10px] font-mono text-pink-400 font-extrabold">
+                        • {previewItem.badgeText}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-white font-bold text-base sm:text-lg">
+                    {previewItem.name}
+                  </h3>
+                  <p className="text-gray-300 text-xs leading-relaxed max-w-xl">
+                    {previewItem.description}
+                  </p>
+                </div>
+
+                <a
+                  href={previewItem.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="whitespace-nowrap w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-purple-600 via-fuchsia-600 to-indigo-600 text-white text-xs font-extrabold rounded-xl shadow-lg hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] transition-all cursor-pointer flex items-center justify-center gap-2"
+                >
+                  Ver Site Interativo →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Floating WhatsApp Button */}
       <motion.a
