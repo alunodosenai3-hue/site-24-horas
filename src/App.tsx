@@ -74,13 +74,13 @@ export default function App() {
     // Dispatch purchase track event (PASSO 5)
     if (typeof (window as any).sendMetaEvent === "function") {
       (window as any).sendMetaEvent("Purchase", {
-        value: 499.00,
+        value: 97.00,
         currency: "BRL"
       });
     }
 
     const text = encodeURIComponent(
-      "Olá Lucas! Vi a página de vendas e quero garantir a Oferta Especial do site profissional em até 24 horas por 499,00 dividido no cartão, com suporte grátis e os 3 PDFs bônus inclusos!"
+      "Olá Lucas! Vi a página de vendas e quero garantir a Oferta Especial do site profissional em até 24 horas por 97,00 dividido no cartão, com suporte grátis e os 3 PDFs bônus inclusos!"
     );
     window.open(`https://wa.me/5571992955846?text=${text}`, "_blank");
   };
@@ -277,7 +277,7 @@ export default function App() {
               { text: "Botão integrado de alta expansão para o Instagram", icon: "📸" },
               { text: "Botão integrado para acelerar seu Google Meu Negócio", icon: "📍" },
               { text: "Site super leve e rápido desenvolvido com tecnologia otimizada", icon: "⚡" },
-              { text: "Hospedagem de alta estabilidade e velocidade inclusa", icon: "🌐" },
+              { text: "Hospedagem de alta qualidade e velocidade apenas: R$: 150,00 anual", icon: "🌐" },
               { text: "Subdomínio integrado de uso imediato e gratuito", icon: "🔗" },
               { text: "Entrega expressa completa em até 24 Horas", icon: "⏰" }
             ].map((item, index) => (
@@ -590,7 +590,7 @@ export default function App() {
                   "Instagram integrado",
                   "Google Negócio integrado",
                   "Site ultra veloz em HTML/JS",
-                  "Hospedagem inclusa",
+                  "Hospedagem de alta qualidade e velocidade apenas: R$: 150,00 anual",
                   "Subdomínio incluso",
                   "Entrega super rápida",
                   "Consultoria estratégica",
@@ -606,12 +606,12 @@ export default function App() {
 
               {/* Price visual emphasis */}
               <div className="pt-6 border-t border-purple-500/10 flex flex-col items-center sm:items-start space-y-1">
-                <span className="text-xxs font-mono text-gray-400 line-through">Preço normal: R$ 1.200,00</span>
+                <span className="text-xxs font-mono text-gray-400 line-through">Preço normal: R$ 349,00</span>
                 <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
                   <span className="text-xs text-gray-400 uppercase font-mono">Por apenas</span>
                   <div className="flex items-baseline gap-2 flex-wrap">
                     <span className="text-3xl md:text-5xl font-mono font-extrabold tracking-tight bg-gradient-to-r from-yellow-300 via-amber-300 to-amber-400 bg-clip-text text-transparent">
-                      499,00
+                      97,00
                     </span>
                     <span className="text-sm md:text-base font-bold text-amber-300 font-mono">
                       dividido no cartão
@@ -619,7 +619,7 @@ export default function App() {
                   </div>
                 </div>
                 <span className="text-[10px] md:text-xxs text-emerald-400 font-mono font-bold uppercase tracking-wider block">
-                  ✨ Sem mensalidade obrigatória • Hospedagem inclusa
+                  ✨ Sem mensalidade obrigatória • Hospedagem apenas R$: 150,00 anual
                 </span>
               </div>
 
